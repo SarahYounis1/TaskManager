@@ -1,5 +1,5 @@
 package com.example.taskmanager.security.JWTSecurity;
-import com.example.taskmanager.daoRepository.TokenRepository;
+import com.example.taskmanager.repository.TokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

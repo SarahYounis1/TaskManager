@@ -1,8 +1,6 @@
-package com.example.taskmanager.restController;
+package com.example.taskmanager.controller;
 
-import com.example.taskmanager.Entity.Task;
-import com.example.taskmanager.Entity.User;
-import com.example.taskmanager.exception.NotFoundException;
+import com.example.taskmanager.entity.Task;
 import com.example.taskmanager.service.TaskServiceImplementation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

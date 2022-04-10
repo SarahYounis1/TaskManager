@@ -1,18 +1,16 @@
 package com.example.taskmanager.service;
 
-import com.example.taskmanager.Entity.Task;
-import com.example.taskmanager.Entity.User;
-import com.example.taskmanager.daoRepository.TaskRepository;
-import com.example.taskmanager.daoRepository.UserRepository;
+import com.example.taskmanager.entity.Task;
+import com.example.taskmanager.entity.User;
+import com.example.taskmanager.repository.TaskRepository;
+import com.example.taskmanager.repository.UserRepository;
 import com.example.taskmanager.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.AccessDeniedException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskServiceImplementation {

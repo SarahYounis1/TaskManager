@@ -1,4 +1,4 @@
-package com.example.taskmanager.Entity;
+package com.example.taskmanager.entity;
 import javax.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;

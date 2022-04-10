@@ -1,6 +1,6 @@
-package com.example.taskmanager.restController;
+package com.example.taskmanager.controller;
 
-import com.example.taskmanager.Entity.User;
+import com.example.taskmanager.entity.User;
 import com.example.taskmanager.models.AuthenticationRequest;
 import com.example.taskmanager.models.AuthenticationResponse;
 import com.example.taskmanager.service.UserServiceImplementation;

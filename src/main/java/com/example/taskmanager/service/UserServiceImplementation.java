@@ -1,10 +1,10 @@
 package com.example.taskmanager.service;
 
-import com.example.taskmanager.Entity.Tokens;
-import com.example.taskmanager.Entity.User;
-import com.example.taskmanager.daoRepository.TaskRepository;
-import com.example.taskmanager.daoRepository.TokenRepository;
-import com.example.taskmanager.daoRepository.UserRepository;
+import com.example.taskmanager.entity.Tokens;
+import com.example.taskmanager.entity.User;
+import com.example.taskmanager.repository.TaskRepository;
+import com.example.taskmanager.repository.TokenRepository;
+import com.example.taskmanager.repository.UserRepository;
 import com.example.taskmanager.exception.UserAlreadyExistException;
 import com.example.taskmanager.models.AuthenticationRequest;
 import com.example.taskmanager.models.AuthenticationResponse;
