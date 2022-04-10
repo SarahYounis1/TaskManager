@@ -20,6 +20,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Service
 public class UserServiceImplementation {
@@ -107,5 +109,18 @@ public class UserServiceImplementation {
         taskRepository.deleteAllByUser_Id(requestingUser.getId());
         tokenRepository.deleteAllByUserId(requestingUser.getId());
         userRepository.deleteById(requestingUser.getId());
+    }
+
+    public void logOut(HttpServletRequest request) {
+        final String authorizationHeader = request.getHeader("Authorization");
+        String jwt = authorizationHeader.substring(7); //get the jwt and delete by it
+        tokenRepository.deleteById(jwt);
+    }
+
+    public void logOutAll() {
+        //delete all  jwt for this user
+        User requestingUser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        tokenRepository.deleteAllByUserId(requestingUser.getId());
+
     }
 }

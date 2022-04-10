@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController
@@ -59,4 +60,15 @@ public class UserRestController {
         userServiceImplementation.deleteUser( );
     }
 
+    @PostMapping("/user/logout")
+    public String logOut(HttpServletRequest request){
+        userServiceImplementation.logOut(request);
+        return "You're logged out";
+    }
+
+    @PostMapping("/user/logoutall")
+    public String logOutAll(){
+        userServiceImplementation.logOutAll();
+        return "You're logged out from all devices";
+    }
 }
