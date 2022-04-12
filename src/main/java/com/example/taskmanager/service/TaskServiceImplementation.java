@@ -96,24 +96,18 @@ public class TaskServiceImplementation {
 
     public void checkTimeValidation(Task task , boolean edit){
         User requestingUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //get user from token
-        List<Task> tasks = taskRepository.findAllByUser_Id(requestingUser.getId());//get all user Tasks
+//        List<Task> tasks = taskRepository.findAllByUser_Id(requestingUser.getId());//get all user Tasks
         Date startDate = task.getStartDate();
         Date endDate = task.getEndDate();
+        List<Task> tasks = taskRepository.findAllByUser_IdAndEndDateIsAfterAndStartDateBefore(
+                requestingUser.getId(),startDate,endDate);
+        int count= tasks.size();
 
-        for (Task theTask : tasks){
-
-            if(edit && (theTask.getId() == task.getId()))continue;  //if it's the same Task
-
-            if(startDate.after(theTask.getStartDate()) && startDate.before(theTask.getEndDate()))
-                throw new NotAllowedDateException("invalid Date"); // if it starts through task interval
-            else if(endDate.after(theTask.getStartDate()) && endDate.before(theTask.getEndDate()))
-                throw new NotAllowedDateException("invalid Date"); // if it ends through task interval
-            else if (startDate.before(theTask.getStartDate()) && endDate.after(theTask.getEndDate()))
-                throw new NotAllowedDateException("invalid Date"); //if begin before the task and ends after it
-            else if (startDate.equals(theTask.getStartDate()) || endDate.equals((theTask.getEndDate())))
-                throw new NotAllowedDateException("invalid Date"); // if it has the same start and end date as existing task
-
-        }
+        if(count>1)throw new NotAllowedDateException("invalid Date");
+        else if(count==1)
+            if(edit)
+            if(tasks.get(0).getId() != task.getId())throw new NotAllowedDateException("invalid time");
+            else throw new NotAllowedDateException("invalid Date");
 
     }
 }

@@ -11,11 +11,13 @@ import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task,Long> {
     void deleteAllByUser_Id(Long id);
-    List<Task> findAllByUser_Id(Long id);
-    //function to find tasks for specific user but not the completed ones
-    @Query("select a from Task a where a. <= :creationDateTime")
-    List<Task> findAllWithCreationDateTimeBefore(@Param("creationDateTime") Date creationDateTime);
 
-}
+    List<Task> findAllByUser_Id(Long id);
+
+    List<Task> findAllByUser_IdAndEndDateIsAfterAndStartDateBefore
+            (Long id,@Param("start") Date start,@Param("end") Date end);
+
+
     //No code is needed CRUD functions already exist within JPARepository
 
+}
