@@ -3,6 +3,7 @@ package com.example.taskmanager.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name ="task")
@@ -20,6 +21,13 @@ public class Task {
     @Column(name="completed")
     private boolean completed;
 
+
+    @Column(name ="start_date")
+    private Date start_date;
+
+
+    @Column(name ="end_date")
+    private Date end_date;
     //Generate Relationships
 
     @ManyToOne() // Not Cascade.all because we don't want to remove the user when deleting the task
@@ -75,6 +83,18 @@ public class Task {
         this.user = user;
     }
 
+    public Long getUserId() {
+        return user.getId();
+    }
+
+    public Date getStart_date() {return start_date;}
+
+    public void setStart_date(Date start_date) {this.start_date = start_date;}
+
+    public Date getEnd_date() {return end_date;}
+
+    public void setEnd_date(Date end_date) {this.end_date = end_date;}
+
     //ToString
     @Override
     public String toString() {
@@ -83,7 +103,5 @@ public class Task {
     }
 
 
-    public Long getUserId() {
-        return user.getId();
-    }
+
 }
