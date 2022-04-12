@@ -23,11 +23,11 @@ public class Task {
 
 
     @Column(name ="start_date")
-    private Date start_date;
+    private Date startDate;
 
 
     @Column(name ="end_date")
-    private Date end_date;
+    private Date endDate;
     //Generate Relationships
 
     @ManyToOne() // Not Cascade.all because we don't want to remove the user when deleting the task
@@ -87,13 +87,13 @@ public class Task {
         return user.getId();
     }
 
-    public Date getStart_date() {return start_date;}
+    public Date getStartDate() {return startDate;}
 
-    public void setStart_date(Date start_date) {this.start_date = start_date;}
+    public void setStartDate(Date startDate) {this.startDate = startDate;}
 
-    public Date getEnd_date() {return end_date;}
+    public Date getEndDate() {return endDate;}
 
-    public void setEnd_date(Date end_date) {this.end_date = end_date;}
+    public void setEndDate(Date endDate) {this.endDate = endDate;}
 
     //ToString
     @Override

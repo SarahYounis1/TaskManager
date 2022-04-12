@@ -69,8 +69,8 @@ public class TaskServiceImplementation {
             task.setDescription(editTask.getDescription());
             task.setCompleted(editTask.isCompleted());
             task.setUser(requestingUser);
-            task.setStart_date(editTask.getStart_date());
-            task.setEnd_date(editTask.getEnd_date());
+            task.setStartDate(editTask.getStartDate());
+            task.setEndDate(editTask.getEndDate());
             taskRepository.save(task);
             return task;
         }
@@ -97,20 +97,20 @@ public class TaskServiceImplementation {
     public void checkTimeValidation(Task task , boolean edit){
         User requestingUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //get user from token
         List<Task> tasks = taskRepository.findAllByUser_Id(requestingUser.getId());//get all user Tasks
-        Date startDate = task.getStart_date();
-        Date endDate = task.getEnd_date();
+        Date startDate = task.getStartDate();
+        Date endDate = task.getEndDate();
 
         for (Task theTask : tasks){
 
             if(edit && (theTask.getId() == task.getId()))continue;  //if it's the same Task
 
-            if(startDate.after(theTask.getStart_date()) && startDate.before(theTask.getEnd_date()))
+            if(startDate.after(theTask.getStartDate()) && startDate.before(theTask.getEndDate()))
                 throw new NotAllowedDateException("invalid Date"); // if it starts through task interval
-            else if(endDate.after(theTask.getStart_date()) && endDate.before(theTask.getEnd_date()))
+            else if(endDate.after(theTask.getStartDate()) && endDate.before(theTask.getEndDate()))
                 throw new NotAllowedDateException("invalid Date"); // if it ends through task interval
-            else if (startDate.before(theTask.getStart_date()) && endDate.after(theTask.getEnd_date()))
+            else if (startDate.before(theTask.getStartDate()) && endDate.after(theTask.getEndDate()))
                 throw new NotAllowedDateException("invalid Date"); //if begin before the task and ends after it
-            else if (startDate.equals(theTask.getStart_date()) || endDate.equals((theTask.getEnd_date())))
+            else if (startDate.equals(theTask.getStartDate()) || endDate.equals((theTask.getEndDate())))
                 throw new NotAllowedDateException("invalid Date"); // if it has the same start and end date as existing task
 
         }
