@@ -99,7 +99,8 @@ public class Task {
     @Override
     public String toString() {
         return "Course [id=" + id +
-                " ,title=" + description + " ,Completed"+ completed +"]";
+                " ,title=" + description + " ,Completed :"+ completed + ", Start Time :"
+        +startDate +"end time : " + endDate +"]";
     }
 
 

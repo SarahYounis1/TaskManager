@@ -5,6 +5,7 @@ import com.example.taskmanager.service.TaskServiceImplementation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -25,10 +26,11 @@ public class TaskRestController {
     }
 
     @GetMapping("/tasks")
-    public List<Task> returnAllTasks() {
+    public Page<Task> returnAllTasks(@RequestParam int page , @RequestParam String sortBy ,
+                                     @RequestParam String sortDirection) {
         LOGGER.info("A get all tasks  request initialized ");
         LOGGER.trace("retrieve all tasks ");
-        return taskServiceImplementation.getAllTasks();
+        return taskServiceImplementation.getAllTasks(page ,sortDirection,sortBy);
     }
     @GetMapping("/tasks/{id}")
     public Task returnTask(@PathVariable Long id) throws  AccessDeniedException {

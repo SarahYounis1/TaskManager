@@ -7,6 +7,9 @@ import com.example.taskmanager.repository.TaskRepository;
 import com.example.taskmanager.repository.UserRepository;
 import com.example.taskmanager.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +29,11 @@ public class TaskServiceImplementation {
         this.userRepository=userRepository;
     }
 
-
-    public List<Task> getAllTasks() {
-        User requestingUser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return taskRepository.findAllByUser_Id(requestingUser.getId());
+    public Page<Task> getAllTasks(int page, String SortDirection , String sortBy ){
+        User requestingUser= (User) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        return taskRepository.findAllByUser_Id(requestingUser.getId(), PageRequest.of(page, 5,
+                Sort.Direction.fromString(SortDirection),sortBy));
     }
 
     public Task getTask(Long id) throws AccessDeniedException {
