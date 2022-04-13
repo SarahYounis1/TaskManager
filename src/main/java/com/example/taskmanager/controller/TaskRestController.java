@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -26,8 +27,9 @@ public class TaskRestController {
     }
 
     @GetMapping("/tasks")
-    public Page<Task> returnAllTasks(@RequestParam int page , @RequestParam String sortBy ,
-                                     @RequestParam String sortDirection) {
+    public Page<Task> returnAllTasks(@RequestParam Optional<Integer> page ,
+                                     @RequestParam Optional <String> sortBy ,
+                                     @RequestParam Optional <String> sortDirection) {
         LOGGER.info("A get all tasks  request initialized ");
         LOGGER.trace("retrieve all tasks ");
         return taskServiceImplementation.getAllTasks(page ,sortDirection,sortBy);

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.nio.file.AccessDeniedException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskServiceImplementation {
@@ -29,11 +30,11 @@ public class TaskServiceImplementation {
         this.userRepository=userRepository;
     }
 
-    public Page<Task> getAllTasks(int page, String SortDirection , String sortBy ){
+    public Page<Task> getAllTasks(Optional<Integer> page, Optional <String> sortDirection , Optional<String> sortBy ){
         User requestingUser= (User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        return taskRepository.findAllByUser_Id(requestingUser.getId(), PageRequest.of(page, 5,
-                Sort.Direction.fromString(SortDirection),sortBy));
+        return taskRepository.findAllByUser_Id(requestingUser.getId(), PageRequest.of(page.orElse(0), 5,
+                Sort.Direction.fromString(sortDirection.orElse("asc")),sortBy.orElse("id")));
     }
 
     public Task getTask(Long id) throws AccessDeniedException {
