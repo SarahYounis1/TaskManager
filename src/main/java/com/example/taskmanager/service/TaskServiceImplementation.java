@@ -7,12 +7,16 @@ import com.example.taskmanager.repository.TaskRepository;
 import com.example.taskmanager.repository.UserRepository;
 import com.example.taskmanager.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.AccessDeniedException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskServiceImplementation {
@@ -26,10 +30,11 @@ public class TaskServiceImplementation {
         this.userRepository=userRepository;
     }
 
-
-    public List<Task> getAllTasks() {
-        User requestingUser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return taskRepository.findAllByUser_Id(requestingUser.getId());
+    public Page<Task> getAllTasks(Optional<Integer> page, Optional <String> sortDirection , Optional<String> sortBy ){
+        User requestingUser= (User) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        return taskRepository.findAllByUser_Id(requestingUser.getId(), PageRequest.of(page.orElse(0), 5,
+                Sort.Direction.fromString(sortDirection.orElse("asc")),sortBy.orElse("id")));
     }
 
     public Task getTask(Long id) throws AccessDeniedException {
