@@ -42,10 +42,12 @@ public class Task {
 
     }
 
-    public Task(String description , boolean completed ) {
+    public Task(String description , boolean completed ,Date startDate, Date endDate) {
 
         this.description = description;
         this.completed =completed;
+        this.startDate=startDate;
+        this.endDate=endDate;
 
     }
 

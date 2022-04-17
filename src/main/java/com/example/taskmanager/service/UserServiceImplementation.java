@@ -49,7 +49,6 @@ public class UserServiceImplementation {
 
     //sec version
     public User createNewUser( User newUser)  {
-
         if(userRepository.findByUsername(newUser.getUsername()).isEmpty()){
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             newUser.setPassword( "{bcrypt}" + encoder.encode(newUser.getPassword()));

@@ -50,7 +50,7 @@ public class UserRestController {
     }
 
     @PutMapping("/user")
-    public User edUser(@RequestBody User editUser )  {
+    public User editUser(@RequestBody User editUser )  {
         LOGGER.info("A update user request initialized ");
         LOGGER.trace("updating user information " );
         return userServiceImplementation.editUser(editUser);
@@ -66,7 +66,7 @@ public class UserRestController {
         return "You're logged out";
     }
 
-    @PostMapping("/user/logoutall")
+    @PostMapping("/user/logoutAll")
     public String logOutAll(){
         userServiceImplementation.logOutAll();
         return "You're logged out from all devices";
