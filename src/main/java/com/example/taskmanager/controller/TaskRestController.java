@@ -1,5 +1,4 @@
 package com.example.taskmanager.controller;
-
 import com.example.taskmanager.entity.Task;
 import com.example.taskmanager.service.TaskServiceImplementation;
 import org.slf4j.Logger;
@@ -9,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -47,7 +45,7 @@ public class TaskRestController {
         return taskServiceImplementation.createTask(task);
     }
     @PutMapping("/tasks/{id}")
-    public Task edTask(@RequestBody Task editTask, @PathVariable Long id) throws AccessDeniedException {
+    public Task editTask(@RequestBody Task editTask, @PathVariable Long id) throws AccessDeniedException {
         LOGGER.info("A Update task request initialized ");
         LOGGER.trace("Updating a task to a user with id : " + id );
         return taskServiceImplementation.editTask(editTask,id);

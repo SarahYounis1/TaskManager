@@ -39,7 +39,7 @@ public class User implements UserDetails {
          //Generate The relationships
     @OneToMany(mappedBy="user", cascade= CascadeType.REMOVE ,fetch = FetchType.EAGER)
     @JsonManagedReference
-    private List<Task> tasks;
+    private List<Task> tasks= new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade= CascadeType.REMOVE)
     private List<Tokens> tokens = new ArrayList<>();
@@ -51,9 +51,11 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String email, String password, int age) {
+    public User(Long id,String name, String email,String username ,String password, int age) {
+        this.id=id;
         this.name = name;
         this.email = email;
+        this.username=username;
         this.password = password;
         this.age = age;
     }
@@ -143,9 +145,7 @@ public class User implements UserDetails {
     }
 
     public void addTask(Task task) {
-
         this.tasks.add(task);
-        System.out.println("added");
     }
 
 //To string method

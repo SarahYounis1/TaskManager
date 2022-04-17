@@ -14,10 +14,8 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task,Long> {
     void deleteAllByUser_Id(Long id);
 
-    List<Task> findAllByUser_Id(Long id);
-
     Page<Task>findAllByUser_Id(Long id,Pageable pageable);
-
+    List<Task>findAllByUser_Id(Long id);
     List<Task> findAllByUser_IdAndEndDateIsAfterAndStartDateBefore
             (Long id,@Param("start") Date start,@Param("end") Date end);
 
